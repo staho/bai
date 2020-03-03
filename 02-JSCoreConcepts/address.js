@@ -13,3 +13,8 @@ ul. Długa 15
 30-781 Kraków
 POLAND
 */
+
+let option1 = title + " " + name + " " + surname +"\nul. " + street + "\n" + zip + " " + city + "\n" + country.toUpperCase()
+let option2 = `${title} ${name} ${surname}\nul. ${street}\n${zip} ${city}\n${country.toUpperCase()}`
+console.log(option1)
+console.log(option2)
