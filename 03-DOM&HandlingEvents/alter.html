@@ -4,10 +4,10 @@
 		<title>Pink Floyd</title>
 		<meta charset="UTF-8">
 	</head>
-	<body>
-		<h1>Another Brick in the Wall</h1>
-		<h3>Pink Floyd</h3>
-		<p>We don't need no education<br>
+	<body onclick="redBackground()">
+		<h1 onclick="alterTitle(this)">Another Brick in the Wall</h1>
+		<h3 onclick="makeVisible()">Pink Floyd</h3>
+		<p onclick="styleItalics(this)" oncopy="copyMessage()">We don't need no education<br>
 		We don't need no thought control<br>
 		No dark sarcasm in the classroom<br>
 		Teachers leave them kids alone<br>
@@ -15,13 +15,35 @@
 		All in all it's just another brick in the wall<br>
 		All in all you're just another brick in the wall</p>
 		
-		<p style="visibility: hidden;">Pink Floyd were an English rock band formed in London.<br>
+		<p style="visibility: hidden;" id="bandDesc" onclick="insertPhoto(this)">Pink Floyd were an English rock band formed in London.<br>
 		They achieved international acclaim with their progressive<br>
 		and psychedelic music.</p>
 		
 		<script>
 			// a JavaScript code here ...
-			
+			function alterTitle(element){
+				element.innerText = element.innerText + " (Part 2)"
+			}
+			function makeVisible() {
+				let element = document.getElementById("bandDesc")
+				element.style.visibility = "visible"
+			}
+			function styleItalics(element) {
+				element.style.fontStyle = "italic"
+			}
+			function redBackground() {
+				document.body.style.backgroundColor = "yellow"
+			}
+			function copyMessage(event) {
+				alert("When copying have Copyrights in mind")
+			}
+			function insertPhoto(element) {
+				if(document.getElementById("photo") !== null) return;
+				let img = document.createElement("img")
+				img.id = "photo"
+				img.src = "https://upload.wikimedia.org/wikipedia/en/d/d6/Pink_Floyd_-_all_members.jpg"
+				element.parentNode.insertBefore(img, element.nextSibling)
+			}
 		</script>
 	</body>
 </html>

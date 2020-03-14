@@ -11,8 +11,10 @@
     <p>Find elements by tag name</p>
 
     <script>
-        // a JavaScript code here ...
-
+        console.log(document.getElementById("someTest").innerText)
+        console.log(document.getElementsByClassName("important")[0].innerText)
+        console.log(document.getElementsByTagName("p")[0].innerText)
+        Array.from(document.getElementsByTagName("p")).forEach((element, idx) => console.log(`Paragraph element text - ${idx}: ${element.innerText}`))
     </script>
 </body>
 
