@@ -4,9 +4,12 @@
 <head>
     <title>Shopping List</title>
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 </head>
 
 <body>
+    <!-- onload="addDblClickHandler()" -->
     <h1>Shopping List</h1>
     <p>
         New item: <input type="text" name="item">
@@ -34,6 +37,11 @@
             input.value = ""
             last.parentNode.insertBefore(valEl, last.nextSibling)
         }
+        $(document).ready(function(){
+            $("ol").dblclick(function(event){
+                event.target.remove()
+            })
+        })
     </script>
 </body>
 
