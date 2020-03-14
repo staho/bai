@@ -27,15 +27,17 @@
         function addToList() {
             let input = document.getElementsByName("item")[0]
             let inputVal = input.value
-
+                
             let list = document.getElementsByTagName("li")
             let last = list[list.length - 1]
-
             let valEl = document.createElement("li")
             valEl.innerText = `${inputVal}`
 
             input.value = ""
-            last.parentNode.insertBefore(valEl, last.nextSibling)
+            if(last === undefined)
+                document.getElementsByTagName("ol")[0].appendChild(valEl)
+            else 
+                last.parentNode.insertBefore(valEl, last.nextSibling)
         }
         $(document).ready(function(){
             $("ol").dblclick(function(event){
