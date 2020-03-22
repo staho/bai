@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Exchange rates</title>
+		<meta charset="UTF-8">
+	</head>
+	<body onload="readCurrencies()">
+		<h1>Exchange rates</h1>
+        <p id="placeholder-EUR"></p>
+        <p id="placeholder-GBP"></p>
+        <p id="placeholder-USD"></p>
+
+
+		<script>
+			function readCurrencyData(currency) {
+				var readCurr = new XMLHttpRequest();
+				readCurr.open("GET", `http://api.nbp.pl/api/exchangerates/rates/A/${currency}?format=json`, true);
+				readCurr.onreadystatechange = function() {
+					if (readCurr.readyState === 4 && readCurr.status === 200) {
+                        let data = JSON.parse(readCurr.responseText)
+                        console.log(data.rates[0].mid)
+				    	document.getElementById(`placeholder-${currency}`).innerText = `Exchange rate PLN/${currency} = ${data.rates[0].mid}`
+					}
+				}
+				readCurr.send(null);			
+			}
+            function readCurrencies() {
+                readCurrencyData("EUR")
+                readCurrencyData("USD")
+                readCurrencyData("GBP")
+            }
+
+
+
+		</script>
+
+	</body>
+</html>

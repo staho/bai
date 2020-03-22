@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>People</title>
+		<meta charset="UTF-8">
+		
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 		crossorigin="anonymous"></script>
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+	</head>
+	<body>
+		<h1>People</h1>
+		<input type="button" value="Display people data" onclick="readPeopleData()">
+        <p id="personalData"></p>
+        <table id="people" class="cell-border compact stripe">
+		</table>
+
+
+		<script>
+	
+
+            var data;
+			function readPeopleData(file, callback) {
+				var rawFile = new XMLHttpRequest();
+				rawFile.open("GET", "people.json", true);
+				rawFile.onreadystatechange = function() {
+					if (rawFile.readyState === 4 && rawFile.status === 200) {
+						data = JSON.parse(rawFile.responseText)
+						console.log(data)
+                        generatePeopleList(data)
+					}
+				}
+				rawFile.send(null);			
+			}
+
+				
+            function generatePeopleList(people) {
+				$(document).ready(function() {
+    				$('#people').DataTable(
+						{
+							data: people,
+							columns: [
+								{ data: "name", title: "Name"},
+								{ data: "surname", title: "Surname" },
+								{ data: "age", title: "Age" },
+								{ data: "country", title: "Country" },
+								{ data: "email", title: "Email" },
+							]
+						}
+					);
+				} )
+            }
+
+		</script>
+
+	</body>
+</html>

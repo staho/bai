@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exchange rates</title>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"
+        integrity="sha256-8zyeSXm+yTvzUN1VgAOinFgaVFEFTyYzWShOy9w7WoQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css"
+        integrity="sha256-IvM9nJf/b5l2RoebiFno92E5ONttVyaEEsdemDC6iQA=" crossorigin="anonymous" />
+</head>
+
+<body onload="readGoldPrices()">
+    <h1>NBP Gold Price</h1>
+    <p id="placeholder-EUR"></p>
+    <p id="placeholder-GBP"></p>
+    <p id="placeholder-USD"></p>
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+
+
+    <script>
+        function readGoldPrices() {
+            var readCurr = new XMLHttpRequest();
+            readCurr.open("GET", `http://api.nbp.pl/api/cenyzlota/last/10?format=json`, true);
+            readCurr.onreadystatechange = function () {
+                console.log(readCurr)
+                if (readCurr.readyState === 4 && readCurr.status === 200) {
+                    let data = JSON.parse(readCurr.responseText)
+                    console.log(data)
+                    createChart(data)
+                
+                }
+            }
+            readCurr.send(null);
+        }
+        function createChart(data) {
+            let dates = data.map(r => r.data)
+            let prices = data.map(r => r.cena)
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Price of gold in PLN',
+                        data: prices,
+                        borderColor: 'orange',
+                        backgroundColor: 'rgba(0, 0, 0, 0.0)',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Date'
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'PLN'
+						}
+					}]
+				}
+
+                }
+            });
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
