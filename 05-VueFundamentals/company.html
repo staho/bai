@@ -2,8 +2,32 @@
 <html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+      div {align-items: center;}
+      p {white-space: pre-wrap; text-align: center;}
+      table {
+        margin-left:auto;
+        margin-right:auto;
+        border-spacing:20px;
+      }
+      th, td {
+        border: 1px solid black;
+        border-spacing:20px;
+        padding: 25px;
+      }
+
+    </style>
 </head>
 <body>
+  <div id="app"> 
+    <table>
+      <tr>
+        <td>
+          <p v-html="companyBusCard"></p>
+        </td>
+      </tr>
+    </table>
+  </div>
   <script>
     var app = new Vue({
       el: '#app',
@@ -15,7 +39,17 @@
         landline: '22 345 90 21',
         mobile: '888 213 992',
         web: 'http://www.unikpol.pl'
+      },
+      computed: {
+        companyBusCard: function() {
+        let firstPart = `<b>${this.company.toUpperCase()}</b>\n`
+        let secondPart = `${this.address}\n${this.postcode} ${this.city}\n`
+        let thirdPart = `tel. ${this.landline}, ${this.mobile}\n`
+        let link = `<a href="${this.web}">${this.web}</a>`
+
+        return firstPart + secondPart + thirdPart + link
       }
+     }
     });
   </script>
 
