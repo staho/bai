@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"
+    integrity="sha256-8zyeSXm+yTvzUN1VgAOinFgaVFEFTyYzWShOy9w7WoQ=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css"
+    integrity="sha256-IvM9nJf/b5l2RoebiFno92E5ONttVyaEEsdemDC6iQA=" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
+  <div id="app">
+    <canvas id="myChart" width="400" height="400">
+    </canvas>
+  </div>
   <script>
     var app = new Vue({
       el: '#app',
@@ -29,9 +39,32 @@
             language: 'Php',
             popularity: 7.37
           }
-        ] 
+        ]
+      },
+      computed: {
+        chartData: function() {
+          let chart = {}
+          chart.type = "pie"
+          chart.data = {
+            labels: this.films.map(m => m.language),
+            datasets: [{
+              label: "Popularity in %",
+              data: this.films.map(m => m.popularity),
+              backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)", "rgb(3, 252, 48)", "rgb(115, 3, 252)"]
+            }]
+          }
+
+          return chart;
+
+        }
+      },
+      mounted: function () {
+          console.log("Gowno")
+          var ctx = document.getElementById('myChart').getContext('2d');
+          var myPieChart = new Chart(ctx, this.chartData)
       }
     });
   </script>
 </body>
+
 </html>
