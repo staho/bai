@@ -2,8 +2,18 @@
 <html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style></style>
 </head>
 <body>
+  <div id="app"> 
+    <p><b>EMPLOYEE RECORD</b></p>
+    <p>Name 1: {{ name1 }}</p>
+    <p v-if="name2.length !== 0">Name 2: {{ name2 }}</p>
+    <p>Surname: {{ surname }}</p>
+    <p v-if="foreigner">Nationality: {{ nationality }}</p>
+    <p v-else>Pesel: {{ pesel }}</p>
+    <p>Address: {{ address }}</p>
+  </div>
   <script>
     var app = new Vue({
       el: '#app',
@@ -14,7 +24,16 @@
         foreigner: false,
         nationality: 'Polish',
         pesel: '92021708229',
-        address: 'ul. Szeroka 3, Kraków',
+        address: 'ul. Szeroka 3, Kraków'
+      }
+      // data: {
+      //   name1: 'John',
+      //   name2: '',
+      //   surname: 'Brown',
+      //   foreigner: true,
+      //   nationality: 'USA',
+      //   address: 'Holland Drive 4, Chicago'
+      // }
     });
   </script>
 

@@ -2,9 +2,17 @@
 <html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+      p {white-space: pre-wrap;}
+    </style>
 </head>
 <body>
-  <h1>Address</h1>    
+  <h1>Address</h1>   
+  
+  <div id="app">
+    <p>{{ generateAddressData() }}</p>
+    
+  </div>
 
   <script>
     var app = new Vue({
@@ -15,9 +23,15 @@
         address: 'ul. Beskidzka 38',
         postcode: '23-908',
         city: 'Stalowa Wola'
+      },
+      methods: {
+        generateAddressData: function() {
+         return `${this.name} ${this.surname}\n${this.address}\n${this.postcode} ${this.city}`
+        }
       }
     });
   </script>
+
 
 </body>
 </html>

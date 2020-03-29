@@ -2,10 +2,15 @@
 <html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+      p {white-space: pre-wrap;}
+    </style>
 </head>
 <body>
   <h1>Grades</h1>    
-
+  <div id="app"> 
+    <p v-html="returnReceipt"></p>
+  </div>
   <script>
     var app = new Vue({
       el: '#app',
@@ -15,6 +20,19 @@
           unitPrice: 17.5,
           quantity: 3,
           VAT: 23
+        }
+      },
+      computed: {
+        returnReceipt: function() { 
+        let amount = this.product.quantity * this.product.unitPrice
+        let total = amount * (100 + this.product.VAT)/100
+
+          let header = `<b>RECEIPT</b>\n---------------------------\n`
+          let receiptInfo = `Product: ${this.product.name}\nUnit Price: ${this.product.unitPrice} zł\nQuantity: ${this.product.quantity}\n`
+          let computedValues = `Amount: ${amount} zł\nVAT Tax Rate: ${this.product.VAT}%\n`
+          let footer = `================\n<b>Total: ${total.toFixed(2)} zł</b>`
+
+          return header + receiptInfo + computedValues + footer
         }
       }
     });
