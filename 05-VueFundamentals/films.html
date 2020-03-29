@@ -2,8 +2,32 @@
 <html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+      th {font-weight: bold; text-align: left;}
+      th, td, table {border: 1px solid black; padding: 5px;}
+      table {border-collapse: collapse;}
+    </style>
 </head>
 <body>
+  <div id="app"> 
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Director</th>
+        <th>Budget</th>
+      </tr>
+      <tr v-for="movie in films">
+          <td>{{movie.title}}</td>
+          <td>{{movie.year}}</td>
+          <td>{{movie.director}}</td>
+          <td>{{currency(movie.budget)}}</td>
+
+      </tr>
+    </table>
+  </div>
+
+
   <script>
     var app = new Vue({
       el: '#app',
@@ -34,6 +58,10 @@
             budget: 6000000
           }
         ] 
+      },
+      methods: {
+        currency: function(number) {
+        return `$${number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}`;
         }
       }
     });
