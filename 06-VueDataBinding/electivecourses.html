@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <h1>Wybór przemiotów</h1>
+  <div id="app">
+    <input type="checkbox" id= "programowanie" value= "programowanie" v-model="courses"> <label for="programowanie">Programowanie</label><br />
+    <input type="checkbox" id= "nieprogramowanie" value= "nieprogramowanie" v-model="courses"> <label for="nieprogramowanie">Nie-programowanie</label><br />
+    <input type="checkbox" id= "humanistyczny" value= "humanistyczny" v-model="courses"> <label for="humanistyczny">Humanistyczny</label><br />
+    <input type="checkbox" id= "niehumanistyczny" value= "niehumanistyczny" v-model="courses"> <label for="niehumanistyczny">Niehumanistyczny</label><br />
+    <input type="checkbox" id= "zapychacz" value= "zapychacz" v-model="courses"> <label for="zapychacz">Zapychacz</label><br />
+    <span>Ilość wybranych kursów {{ selectedCourses }}</span>
+
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        courses: []
+      },
+      computed: {
+          selectedCourses: function() {
+              return this.courses.length
+          }
+      }
+    });
+  </script>
+
+</body>
+</html>
