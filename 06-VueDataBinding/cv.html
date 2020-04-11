@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <h1>CV</h1>
+  <div id="app">
+    Imie:       <input type="text" v-model="cv.name"></input><br/>
+    Nazwisko:   <input type="text" v-model="cv.surname"></input><br/>
+    Wiek:       <input type="number" id="age" v-model="cv.age" min="0" max="150"><br />
+    <form>
+        <input type="radio" id="male" v-model="cv.gender" value="male">
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" v-model="cv.gender" value="female">
+        <label for="female">Female</label><br>
+        <input type="radio" id="other" v-model="cv.gender" value="other">
+        <label for="other">Other</label>
+    </form>
+    Wykształcenie: <select id="education" v-model="cv.education">
+        <option value="no" selected>brak</option>
+        <option value="basic">podstawowe</option>
+        <option value="medium">średnie</option>
+        <option value="higher">wyższe</option>
+    </select><br/>
+    <span>Dodatkowe umiejętności:</span><br />
+    <input type="checkbox" id= "computer-skills" value= "computer-skills" v-model="cv.additionalSkils"> <label for="computer-skills">Obsługa komputera</label><br />
+    <input type="checkbox" id= "driving-licence" value= "driving-licence" v-model="cv.additionalSkils"> <label for="driving-licence">Prawo jazdy</label><br />
+    <input type="checkbox" id= "creativity" value= "creativity" v-model="cv.additionalSkils"> <label for="creativity">Kreatywność</label><br />
+    <input type="checkbox" id= "team-work" value= "team-work" v-model="cv.additionalSkils"> <label for="team-work">Praca w zespole</label><br />
+    <button v-on:click="saveData">Save</button>
+    <button v-on:click="loadData">Load</button>
+
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+          cv: {
+            additionalSkils: [],
+            name: '',
+            surname: '',
+            age: 0,
+            gender: '',
+            education: ''
+        }
+        
+      },
+      methods: {
+          printData: function() {
+              let cv = this.cv
+              console.log(`Imie: ${cv.name}\nNazwisko: ${cv.surname}\nWiek: ${cv.age}\nPłeć: ${cv.gender}\nEdukacja: ${cv.education}\nUmiejetności dodatkowe: ${cv.additionalSkils}`)
+          },
+          saveData: function() {
+            localStorage.setItem('cv', JSON.stringify(this.cv))
+          },
+          loadData: function() {
+            this.cv = JSON.parse(localStorage.getItem('cv'))
+          }
+      }
+    });
+  </script>
+
+</body>
+</html>
