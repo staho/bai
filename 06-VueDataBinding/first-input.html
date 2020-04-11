@@ -6,13 +6,22 @@
 <body>
   <div id="app">
     <span>Your name:</span>
-    <input type="text" v-model="name">  
+    <input type="text" v-model="name" v-on:input="reportName">  
   </div>
   <script>
     var app = new Vue({
       el: '#app',
       data: {
         name: ''
+      },
+      methods: {
+        reportName: function(event) {
+          console.log(event.target.value)
+        },
+        changeName: function(name) {
+          this.name = name
+        }
+        //to change name from chrome console call app.changeName("NAME")
       }
     });
   </script>
